@@ -4,6 +4,7 @@ const Expert = ({ expert }) => {
   const { name, img } = expert;
   return (
     <div
+    id="experts"
     data-aos="fade-down-right"
     data-aos-delay="50"
     data-aos-duration = '700'

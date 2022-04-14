@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const Footer = () => {
   const year = new Date().getFullYear();
   return (
-    <footer className="text-white py-4 w-full bg-slate-400"
+    <footer className=" py-4 w-full bg-slate-200"
     >
       <p className="text-center">
         <small>

@@ -39,7 +39,7 @@ const Services = () => {
   );
   const load = loading && dataLoading
   return (
-    load || <div>
+    load || <div id="services">
       <h1 className="text-4xl mt-3 font-mono text-center">
         Our services: {services.length}
       </h1>
