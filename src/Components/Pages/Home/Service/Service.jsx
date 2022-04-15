@@ -9,7 +9,7 @@ const Service = ({service}) => {
     }
     const navigate=  useNavigate()
     const handleServiceDetails = (id) => {
-        navigate('/service/' + id)
+        navigate('/services/' + id)
     }
     return (
         <div  data-aos="fade-up" className='lg:w-full md:w-[450px] '>

@@ -1,17 +1,52 @@
-import React, { useRef } from "react";
-import { Link } from "react-router-dom";
+import { async } from "@firebase/util";
+import React, { useEffect, useRef } from "react";
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import auth from "../../../Firebase/firebase.init";
 
 const Login = () => {
   const emailRef = useRef("");
   const passwordRef = useRef("");
+  const location = useLocation();
+  const navigate = useNavigate()
+  const form = location?.state?.form?.pathname || '/'
+  const [signInWithEmailPassword,user,loading,error] = useSignInWithEmailAndPassword(auth);
+  const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
   const handleSummitForm = (e) => {
     e.preventDefault();
     const email = emailRef.current.value
     const password = passwordRef.current.value
-
+    signInWithEmailPassword(email,password)
   };
+  useEffect(() => {
+    if(user){
+      navigate(form,{replace: true})
+      toast('✔️ Successfully login',{
+        autoClose: 1000,
+      })
+    }
+  },[user])
+  if(sending){
+    return <div>Updating....</div>
+  }
+  if(loading){
+    return <p>Loading...</p>
+  }
+  if(error){
+    toast.error('Invalid')
+  }
+  const handleResetPassword = async () => {
+   if(emailRef.current.value === ''){
+      alert('please type your email box')
+   }else{
+      await sendPasswordResetEmail(emailRef.current.value)
+      alert("send email")
+   }
+   
+  }
   return (
-    <div className="block mx-auto my-10 p-6 rounded-lg shadow-lg bg-white max-w-lg">
+    <div className="block mx-auto my-10 p-6 rounded-lg drop-shadow-xl shadow-inner bg-white max-w-lg">
       <h1 className="text-4xl mb-10 text-center text-blue-600 ">
         Please Log in
       </h1>
@@ -91,6 +126,7 @@ const Login = () => {
             </label>
           </div>
           <a
+          onClick={handleResetPassword}
             href="#!"
             className="text-blue-600 hover:text-blue-700 focus:text-blue-700 transition duration-200 ease-in-out"
           >
