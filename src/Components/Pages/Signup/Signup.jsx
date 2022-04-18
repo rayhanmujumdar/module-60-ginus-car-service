@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useCreateUserWithEmailAndPassword, useUpdateProfile } from "react-firebase-hooks/auth";
 import auth from "../../../Firebase/firebase.init";
 import { toast } from "react-toastify";
+import SocialLogin from "../Login/SocialLogIn/SocialLogin";
 
 
 const Signup = () => {
@@ -261,6 +262,7 @@ const Signup = () => {
           Login
         </Link>
       </p>
+      <SocialLogin></SocialLogin>
     </div>
   );
 };

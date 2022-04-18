@@ -17,7 +17,6 @@ const Header = () => {
   const handleSignOut = () => {
     signOut(auth)
   }
-  console.log(user)
   return loading ? (
     <p className="text-center">loading....</p>
   ) : (

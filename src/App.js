@@ -9,7 +9,6 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useEffect } from 'react';
 import ServiceDetails from './Components/Pages/Home/ServiceDetails/ServiceDetails';
-import Login from './Components/Pages/Login/Login';
 import Signup from './Components/Pages/Signup/Signup';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -18,6 +17,8 @@ import RequireAuth from './Components/RequireAuth/RequireAuth';
 import Profile from './Components/Pages/Profile/Profile';
 import Experts from './Components/Pages/Home/Experts/Experts';
 import Services from './Components/Pages/Home/Services/Services';
+import Login from './Components/Pages/Login/Login/Login';
+import { Toaster } from 'react-hot-toast';
 function App() {
   useEffect(() => {
     AOS.init()
@@ -25,6 +26,8 @@ function App() {
   
   return (
     <div className='scroll-smooth'>
+      <ToastContainer></ToastContainer>
+      <Toaster></Toaster>
       <Header></Header>
         <Routes>
           <Route path='/' element={<Home></Home>}></Route>
@@ -45,7 +48,6 @@ function App() {
           <Route path='*' element={<NotFound></NotFound>}></Route>
         </Routes>
       <Footer></Footer>
-      <ToastContainer/>
     </div>
   );
 }
