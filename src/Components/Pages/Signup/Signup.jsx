@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faL } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useCreateUserWithEmailAndPassword, useUpdateProfile } from "react-firebase-hooks/auth";
 import auth from "../../../Firebase/firebase.init";
@@ -9,6 +9,7 @@ import SocialLogin from "../Login/SocialLogIn/SocialLogin";
 
 
 const Signup = () => {
+  const [agree,setAgree] = useState(true)
   const [user,setUser] = useState({
     name: '',
     email: '',
@@ -28,13 +29,16 @@ const Signup = () => {
   ] = useCreateUserWithEmailAndPassword(auth);
   const [updateProfiles,updating] = useUpdateProfile(auth)
   const navigate = useNavigate()
-  const handleRegisterFrom = (e) => {
+  //handle registerfrom
+  const handleRegisterFrom = async (e) => {
     e.preventDefault();
-    createUserWithEmailAndPassword(user?.email,user?.confirmPassword)
+    if(agree){
+    await createUserWithEmailAndPassword(user?.email,user?.confirmPassword)
     .then(() =>{
       const displayName = user?.name
       updateProfiles({ displayName })
     })
+  }
   };
 
   const handleName = (e) => {
@@ -81,6 +85,7 @@ const Signup = () => {
       navigate('/verify')
     }
   },[userWithSignUp]) 
+  console.log(agree)
   useEffect(() => {
     if(errorWithSignUp){
       switch(errorWithSignUp?.code){
@@ -95,9 +100,8 @@ const Signup = () => {
       }
     }
   },[errorWithSignUp])
-  console.log(errorWithSignUp?.code)
   const missMatchPass =  error?.password === error?.confirmPassword
-  console.log(missMatchPass)
+  console.log(agree)
   return (
     <div className="block mx-auto my-10 p-6 rounded-lg shadow-lg bg-white max-w-lg">
       <h1 className="text-4xl mb-10 text-center text-blue-600 ">
@@ -219,25 +223,28 @@ const Signup = () => {
         </div>
         <div className="form-group form-check text-center mb-6">
           <input
+          name="checkbox"
             type="checkbox"
             className="form-check-input appearance-none h-4 w-4 border border-stone-400 rounded-sm bg-white checked:bg-green-700 checked:border-green-800 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain mr-2 cursor-pointer"
             id="exampleCheck25"
             defaultChecked
+            onClick={() => setAgree(!agree)}
           />
           <label
             className="form-check-label inline-block text-gray-800"
             htmlFor="exampleCheck25"
+            
           >
-            Subscribe to our genius car
+            genius car terms and condition
           </label>
         </div>
         <button
           type="submit"
-          className="
+          className={`
           w-full
           px-6
           py-2.5
-          bg-blue-600
+          
           text-white
           font-medium
           text-xs
@@ -250,7 +257,9 @@ const Signup = () => {
           active:bg-blue-800 active:shadow-lg
           transition
           duration-150
-          ease-in-out"
+          ease-in-out
+          ${!agree ? 'bg-blue-200': 'bg-blue-600'}`}
+          disabled={!agree}
         >
           Sign up
         </button>
