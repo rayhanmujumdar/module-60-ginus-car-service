@@ -2,15 +2,12 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Service = ({service}) => {
-    const {id,name,img,price,description} = service
+    const {_id,name,img,price,description} = service
     const [toggle,setToggle] = useState(false)
-    const handleDiscription = (toggle) => {
+    const handleDescription = (toggle) => {
         setToggle(toggle)
     }
     const navigate=  useNavigate()
-    const handleServiceDetails = (id) => {
-        navigate('/services/' + id)
-    }
     return (
         <div  data-aos="fade-up" className='lg:w-full md:w-[450px] '>
             <div className='flex flex-col item-center justify-center bg-stone-600 rounded-md text-white md:p-4 hover:scale-[0.98] duration-500 hover:shadow-xl'
@@ -19,11 +16,11 @@ const Service = ({service}) => {
             <div className='p-3 md:p-0 text-left'>
                 <h2 className='text-2xl lg:text-4xl'>{name}</h2>
                 <p className='text-xl'>Price: ${price || 'comming soon'}</p>
-                <p onClick={() => handleDiscription(!toggle)} className={`text-red-600 underline cursor-pointer ${toggle && 'animate-bounce'} animate-pulse hover:animate-none text-[17px]`}>Description</p>
+                <p onClick={() => handleDescription(!toggle)} className={`text-red-600 underline cursor-pointer ${toggle && 'animate-bounce'} animate-pulse hover:animate-none text-[17px]`}>Description</p>
                 {
                     toggle && <p>{description}</p>
                 }
-                <button onClick={() => handleServiceDetails(id)} className='bg-stone-500 mt-3 px-3 py-2 rounded-lg hover:bg-stone-800 hover:duration-700 duration-700'>Book: {name}</button>
+                <button onClick={() => navigate('/services/' + _id)} className='bg-stone-500 mt-3 px-3 py-2 rounded-lg hover:bg-stone-800 hover:duration-700 duration-700'>Book: {name}</button>
             </div>
         </div>
         </div>

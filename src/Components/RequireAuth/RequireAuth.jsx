@@ -2,6 +2,7 @@ import React from 'react';
 import {useAuthState} from 'react-firebase-hooks/auth'
 import { Navigate, useLocation } from 'react-router-dom';
 import auth from '../../Firebase/firebase.init'
+import EmailVerify from '../Pages/EmailVerify/EmailVerify';
 const RequireAuth = ({children}) => {
     console.log(children)
     const [user,loading,error] = useAuthState(auth)
@@ -12,6 +13,9 @@ const RequireAuth = ({children}) => {
     }
     if(!user){
         return <Navigate to='/login' state={{from: location}}></Navigate>
+    }
+    if(!user?.emailVerified){
+        return <EmailVerify></EmailVerify>
     }
     return children
 };

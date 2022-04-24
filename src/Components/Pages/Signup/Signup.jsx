@@ -26,7 +26,7 @@ const Signup = () => {
     userWithSignUp,
     loading,
     errorWithSignUp,
-  ] = useCreateUserWithEmailAndPassword(auth);
+  ] = useCreateUserWithEmailAndPassword(auth,{sendEmailVerification: true});
   const [updateProfiles,updating] = useUpdateProfile(auth)
   const navigate = useNavigate()
   //handle registerfrom
@@ -37,6 +37,11 @@ const Signup = () => {
     .then(() =>{
       const displayName = user?.name
       updateProfiles({ displayName })
+    })
+    .then(() => {
+      toast.success('email verify send',{
+        id: 'success'
+      })
     })
   }
   };

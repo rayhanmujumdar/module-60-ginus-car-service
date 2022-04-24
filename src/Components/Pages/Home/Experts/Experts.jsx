@@ -5,8 +5,9 @@ import expert3 from '../../../../images/experts/expert-3.jpg'
 import expert4 from '../../../../images/experts/expert-4.jpg'
 import expert5 from '../../../../images/experts/expert-5.jpg'
 import expert6 from '../../../../images/experts/expert-6.png'
+import PageTitle from '../../../Shared/PageTitle/PageTitle';
 import Expert from '../Expert/Expert';
-const Experts = () => {
+const Experts = ({title}) => {
     const experts = [
         {id: 1, name: 'will smith', img: expert1},
         {id: 2, name: 'Chris Rock', img: expert2},
@@ -15,8 +16,10 @@ const Experts = () => {
         {id: 5, name: 'Ronaldo Bro', img: expert5},
         {id: 6, name: 'Stachy jhonson', img: expert6}
     ]
+    console.log(title)
     return (
         <div className='my-10'>
+            <PageTitle title={title || 'home'}></PageTitle>
             <h1 className='text-center text-4xl font-semibold font-mono py-5'>Our experts</h1>
             <div className='grid md:grid-cols-2 lg:grid-cols-3 justify-items-center gap-6'>
                 {

@@ -19,27 +19,38 @@ import Experts from './Components/Pages/Home/Experts/Experts';
 import Services from './Components/Pages/Home/Services/Services';
 import Login from './Components/Pages/Login/Login/Login';
 import { Toaster } from 'react-hot-toast';
+import AddService from './Components/Pages/AddService/AddService';
+import ManageServices from './Components/Pages/ManageServices/ManageServices';
 function App() {
   useEffect(() => {
     AOS.init()
   },[])
-  
   return (
-    <div className='scroll-smooth'>
+    <div>
       <ToastContainer></ToastContainer>
       <Toaster></Toaster>
       <Header></Header>
         <Routes>
           <Route path='/' element={<Home></Home>}></Route>
-          <Route path='/home' element={<Home></Home>}></Route>
+          <Route path='/home' element={<Home title='home'></Home>}></Route>
           <Route path='/services' element={<Services></Services>}></Route>
-          <Route path='/experts' element={<Experts></Experts>}></Route>
+          <Route path='/experts' element={<Experts title='experts'></Experts>}></Route>
           <Route path='/profile' element={<Profile></Profile>}></Route>
           <Route path='/about' element={<About></About>}></Route> 
           <Route path='services/:serviceId' element=
           {
             <RequireAuth>
               <ServiceDetails></ServiceDetails>
+            </RequireAuth>
+          }></Route>
+          <Route path='/addservice' element={
+            <RequireAuth>
+              <AddService></AddService>
+            </RequireAuth>
+          }></Route>
+          <Route path='/manage' element={
+            <RequireAuth>
+              <ManageServices></ManageServices>
             </RequireAuth>
           }></Route>
           <Route path='/login' element={<Login></Login>}></Route>

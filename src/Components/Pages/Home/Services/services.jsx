@@ -1,11 +1,13 @@
 import React from "react";
 import useServices from "../../../../Hooks/useServices";
+import PageTitle from "../../../Shared/PageTitle/PageTitle";
 import Service from "../Service/Service";
 
 const Services = () => {
   const [services, setServices, loading] = useServices();
   const dataLoading = (
     <div className="bg-stone-300 bg-opacity-30 h-screen w-full flex justify-center items-center min-h-full">
+      <PageTitle title='services'></PageTitle>
         <div className="flex items-center justify-center bg-black bg-opacity-20">
         <button
             type="button"
@@ -48,7 +50,7 @@ const Services = () => {
             gap-6 my-10 mx-3 justify-items-center"
       >
         {services.map((service) => (
-          <Service key={service.id} service={service}></Service>
+          <Service key={service._id} service={service}></Service>
         ))}
       </div>
     </div>

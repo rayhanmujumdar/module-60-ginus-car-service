@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../../../Firebase/firebase.init";
 import SocialLogin from "../SocialLogIn/SocialLogin";
 import toast from 'react-hot-toast'
+import PageTitle from "../../../Shared/PageTitle/PageTitle";
 
 const Login = () => {
   const emailRef = useRef("");
@@ -57,6 +58,7 @@ const Login = () => {
   }
   return (
     <div className="block mx-auto my-10 p-6 rounded-lg drop-shadow-xl shadow-inner bg-white max-w-lg">
+      <PageTitle title="Login"></PageTitle>
       <h1 className="text-4xl mb-10 text-center text-blue-600 ">
         Please Log in
       </h1>

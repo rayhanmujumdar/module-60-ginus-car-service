@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import useServices from '../../../../Hooks/useServices';
 
 const ServiceDetails = () => {
     const {serviceId} = useParams()
     const [details,setDetails] = useState({})
-    const [services,setServices] = useServices()
-    console.log(services)
     useEffect(() => {
-        const expert = services.find(service => service?.id === Number(serviceId))
-        setDetails(expert)
-    },[services])
+        const url = `http://localhost:5000/service/${serviceId}`
+        fetch(url)
+        .then(res => res.json())
+        .then(data => setDetails(data))
+    },[])
     console.log(details)
     return (
         <div>
-            <h1>service details{serviceId}</h1>
+            <h1>service name: {details.name}</h1>
+            <img src={details.img} alt="" />
         </div>
     );
 };
