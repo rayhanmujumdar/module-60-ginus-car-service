@@ -1,20 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import useDetails from '../../../../Hooks/useDetails';
 
 const ServiceDetails = () => {
     const {serviceId} = useParams()
-    const [details,setDetails] = useState({})
-    useEffect(() => {
-        const url = `http://localhost:5000/service/${serviceId}`
-        fetch(url)
-        .then(res => res.json())
-        .then(data => setDetails(data))
-    },[])
+    const [details] = useDetails(serviceId)
+    const navigate = useNavigate()
+    
     console.log(details)
     return (
-        <div>
-            <h1>service name: {details.name}</h1>
+        <div className='flex justify-center flex-col items-center my-10'>
+            <h1 className='text-3xl my-3'>Service name: {details.name}</h1>
             <img src={details.img} alt="" />
+            <button onClick={() => navigate(`/checkout/${serviceId}`)} className='mt-5 bg-green-600 text-white px-4 py-2 rounded-md'>Proccess Checkout</button>
         </div>
     );
 };

@@ -21,6 +21,7 @@ import Login from './Components/Pages/Login/Login/Login';
 import { Toaster } from 'react-hot-toast';
 import AddService from './Components/Pages/AddService/AddService';
 import ManageServices from './Components/Pages/ManageServices/ManageServices';
+import Process from './Components/Pages/Home/Process/Process';
 function App() {
   useEffect(() => {
     AOS.init()
@@ -36,7 +37,13 @@ function App() {
           <Route path='/services' element={<Services></Services>}></Route>
           <Route path='/experts' element={<Experts title='experts'></Experts>}></Route>
           <Route path='/profile' element={<Profile></Profile>}></Route>
-          <Route path='/about' element={<About></About>}></Route> 
+          <Route path='/about' element={<About></About>}></Route>
+      
+          <Route path='/checkout/:processId' element={
+            <RequireAuth>
+              <Process></Process>
+            </RequireAuth>
+          }></Route>
           <Route path='services/:serviceId' element=
           {
             <RequireAuth>
