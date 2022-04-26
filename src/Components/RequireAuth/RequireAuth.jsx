@@ -4,7 +4,6 @@ import { Navigate, useLocation } from 'react-router-dom';
 import auth from '../../Firebase/firebase.init'
 import EmailVerify from '../Pages/EmailVerify/EmailVerify';
 const RequireAuth = ({children}) => {
-    console.log(children)
     const [user,loading,error] = useAuthState(auth)
     const location = useLocation();
     if(loading){

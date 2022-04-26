@@ -5,6 +5,7 @@ import auth from "../../../../Firebase/firebase.init";
 import SocialLogin from "../SocialLogIn/SocialLogin";
 import toast from 'react-hot-toast'
 import PageTitle from "../../../Shared/PageTitle/PageTitle";
+import axios from "axios";
 
 const Login = () => {
   const emailRef = useRef("");
@@ -21,11 +22,13 @@ const Login = () => {
         signInWithGoogle()
     }
   //from authentication
-  const handleSummitForm = (e) => {
+  const handleSummitForm = async (e) => {
     e.preventDefault();
     const email = emailRef.current.value
     const password = passwordRef.current.value
-    signInWithEmailPassword(email,password)
+    await signInWithEmailPassword(email,password)
+    const {data} = await axios.post('http://localhost:5000/login',email)
+    localStorage.setItem('accessToken',data.accessToken)
   };
   useEffect(() => {
     const socialAndFromuser = user || googleUser

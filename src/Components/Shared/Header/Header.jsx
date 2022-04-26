@@ -116,7 +116,7 @@ const Header = () => {
                   to="addservice"
                   className="text-xl font-semibold hover:text-red-600 mx-2"
                 >
-                  Add service
+                  Add-service
                 </Link>
               </li>
               <li>
@@ -125,6 +125,14 @@ const Header = () => {
                   className="text-xl font-semibold hover:text-red-600 mx-2"
                 >
                   Manage
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="order"
+                  className="text-xl font-semibold hover:text-red-600 mx-2"
+                >
+                  Order
                 </Link>
               </li>
             </>
