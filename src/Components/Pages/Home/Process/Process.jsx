@@ -35,7 +35,7 @@ const Process = () => {
             address: e.target.address.value,
             phone: e.target.phone.value
         }
-        axios.post('http://localhost:5000/order',order)
+        axios.post('https://limitless-wave-54217.herokuapp.com/order',order)
         .then(response => {
             const {data} = response
             console.log(data)

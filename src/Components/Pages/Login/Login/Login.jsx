@@ -25,10 +25,12 @@ const Login = () => {
   const handleSummitForm = async (e) => {
     e.preventDefault();
     const email = emailRef.current.value
+    console.log(email)
     const password = passwordRef.current.value
     await signInWithEmailPassword(email,password)
-    const {data} = await axios.post('http://localhost:5000/login',email)
-    localStorage.setItem('accessToken',data.accessToken)
+    const {data} = await axios.post('https://limitless-wave-54217.herokuapp.com/login',{email})
+    console.log(data)
+    localStorage.setItem('accessToken',data?.accessToken)
   };
   useEffect(() => {
     const socialAndFromuser = user || googleUser

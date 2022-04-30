@@ -4,7 +4,7 @@ const useServices = (reload) => {
     const [services,setServices] = useState([])
     const [loading,setLoading] = useState(true);
     useEffect(() => {
-        fetch('http://localhost:5000/service')
+        fetch('https://limitless-wave-54217.herokuapp.com/service')
         .then(res => res.json())
         .then(data => {
             setServices(data)

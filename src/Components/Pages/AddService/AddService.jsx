@@ -7,7 +7,7 @@ const AddService = () => {
     const formRef = useRef(null)
   const onSubmit = (data) => {
     console.log(data)
-    const url = `http://localhost:5000/service`;
+    const url = `https://limitless-wave-54217.herokuapp.com/service`;
     fetch(url,{
         method: "POST",
         headers: {

@@ -9,7 +9,7 @@ const handleDelete = (id) => {
     const process = window.confirm('Are you sure?')
     console.log(id)
     if(process){
-        const url = `http://localhost:5000/service/${id}`
+        const url = `https://limitless-wave-54217.herokuapp.com/service/${id}`
         fetch(url,{
             method: 'DELETE'
         })
